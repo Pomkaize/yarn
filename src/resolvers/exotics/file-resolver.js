@@ -36,13 +36,15 @@ export default class FileResolver extends ExoticResolver {
       loc = path.resolve(this.config.lockfileFolder, loc);
     }
 
+    const hash = `${uuid.v4()}-${new Date().getTime()}`;
+
     if (this.config.linkFileDependencies) {
       const registry: RegistryNames = 'npm';
       const manifest: Manifest = {_uid: '', name: '', version: '0.0.0', _registry: registry};
       manifest._remote = {
         type: 'link',
         registry,
-        hash: null,
+        hash,
         reference: loc,
       };
       manifest._uid = manifest.version;
@@ -75,7 +77,7 @@ export default class FileResolver extends ExoticResolver {
     manifest._remote = {
       type: 'copy',
       registry,
-      hash: `${uuid.v4()}-${new Date().getTime()}`,
+      hash,
       reference: loc,
     };
 

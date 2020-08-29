@@ -105,6 +105,13 @@ test('packages installed through the link protocol should validate all peer depe
     ).toEqual(['some-missing-pkg', 'some-other-pkg', 'some-pkg/package.json']);
   }));
 
+test('test', () =>
+  runInstall({}, 'workspaces-install-same-links', async (config, reporter, install, getStdout) => {
+    console.log(config);
+    console.log(getStdout());
+  })
+)
+
 test('installing a package with a renamed file should not delete it', () =>
   runInstall({}, 'case-sensitivity', async (config, reporter): Promise<void> => {
     const pkgJson = await fs.readJson(`${config.cwd}/package.json`);

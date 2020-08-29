@@ -8,6 +8,7 @@ import * as util from '../../util/misc.js';
 import * as fs from '../../util/fs.js';
 
 const path = require('path');
+const uuid = require('uuid');
 
 export const LINK_PROTOCOL_PREFIX = 'link:';
 
@@ -38,7 +39,7 @@ export default class LinkResolver extends ExoticResolver {
     manifest._remote = {
       type: 'link',
       registry,
-      hash: null,
+      hash: `${uuid.v4()}-${new Date().getTime()}`,
       reference: loc,
     };
 
